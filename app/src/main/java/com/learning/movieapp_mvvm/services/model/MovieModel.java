@@ -5,7 +5,7 @@ import java.util.List;
 
 public class MovieModel {
     private Integer page;
-    private List<Result> results = new ArrayList<Result>();
+    private List<Result> results = new ArrayList<>();
     private Integer totalPages;
     private Integer totalResults;
 

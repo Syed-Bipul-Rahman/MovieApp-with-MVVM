@@ -15,18 +15,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MovieAppRepository {
+public class MovieRepository {
     private static Context mContext;
-    private static MovieAppRepository instance;
+    private static MovieRepository instance;
     private List<Result> mResult;
     private MovieModel movieModel;
-    private MutableLiveData mutableLiveData;
+    private MutableLiveData mLiveData;
 
-    public static MovieAppRepository getInstance(Context context) {
+    public static MovieRepository getInstance(Context context) {
 
         if (instance == null) {
             mContext = context;
-            instance = new MovieAppRepository();
+            instance = new MovieRepository();
 
         }
         return instance;
@@ -34,17 +34,17 @@ public class MovieAppRepository {
     }
 
 
-    public MutableLiveData<List<Result>> getTopRatedMovieLists() {
+    public MutableLiveData<List<Result>> getMovieLists() {
 
 
-        if (mutableLiveData == null) {
-            mutableLiveData = new MutableLiveData();
+        if (mLiveData == null) {
+            mLiveData = new MutableLiveData();
         }
 
 
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
 
-        Call<MovieModel> call = apiService.getMovieList();
+        Call<MovieModel> call = apiService.getTopRatedMovieLists();
 
         call.enqueue(new Callback<MovieModel>() {
             @Override
@@ -53,7 +53,7 @@ public class MovieAppRepository {
                 movieModel = response.body();
                 mResult = movieModel.getResults();
 
-                mutableLiveData.postValue(mResult);
+                mLiveData.postValue(mResult);
 
             }
 
@@ -62,7 +62,7 @@ public class MovieAppRepository {
 
             }
         });
-        return mutableLiveData;
+        return mLiveData;
     }
 
 

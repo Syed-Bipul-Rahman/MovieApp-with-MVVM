@@ -6,6 +6,6 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface ApiService {
-    @GET("top_rated?api_key=e27c06ee8872bade429cc658daf350f5")
-    Call<MovieModel> getMovieList();
+    @GET("3/movie/top_rated?api_key=e27c06ee8872bade429cc658daf350f5")
+    Call<MovieModel> getTopRatedMovieLists();
 }
